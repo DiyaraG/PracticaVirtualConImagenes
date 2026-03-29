@@ -128,7 +128,7 @@ st.markdown(f"""
 col_teoria1, col_teoria2 = st.columns(2)
 
 with col_teoria1:
-    with st.expander("Ecuaciones de Conservación y Descarga", expanded=False):
+    with st.expander("Fundamento teórico: Ecuaciones de Conservación y Descarga", expanded=False):
         st.markdown(r"""
         La dinámica del sistema se describe mediante el **Balance Global de Masa** para un volumen de control con densidad constante ($\rho$):
         
@@ -148,7 +148,7 @@ with col_teoria1:
         """)
 
 with col_teoria2:
-    with st.expander("Control: Estrategia PID Discreta", expanded=False):
+    with st.expander("Fundamento teórico: Estrategia de control PID", expanded=False):
         st.markdown(r"""
         El "cerebro" de la simulación es un controlador **Proporcional-Integral-Derivativo (PID)**, cuya acción de control $u(t)$ busca minimizar el error ($e = SP - h$):
         
