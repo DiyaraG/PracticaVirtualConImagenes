@@ -194,7 +194,7 @@ st.sidebar.markdown("---")
 # Botones de Control
 col_btn1, col_btn2 = st.sidebar.columns(2)
 with col_btn1:
-    iniciar_sim = st.button("🚀 Iniciar", use_container_width=True)
+    iniciar_sim = st.button("▶️ Iniciar", use_container_width=True)
 with col_btn2:
     btn_reset = st.button("🔄 Reset", use_container_width=True, type="secondary")
 
