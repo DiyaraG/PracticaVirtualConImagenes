@@ -22,10 +22,17 @@ if 'ejecutando' not in st.session_state:
 # Estilos CSS Unificados: Profesionalismo + Animación de Flujo
 st.markdown("""
     <style>
-    /* 1. CONFIGURACIÓN GLOBAL Y CURSOR */
+    /* 1. CONFIGURACIÓN GLOBAL Y CURSOR DE INGENIERÍA */
     html, body, [data-testid="stAppViewContainer"] {
-        cursor: url('https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/1f9ea.png'), auto;
+        /* Usamos el engranaje (2699) con un tamaño optimizado para precisión */
+        cursor: url('https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/2699.png') 32 32, auto;
     }
+    
+    /* Cambiamos el cursor también para los elementos interactivos */
+    button, a, input, select, [data-testid="stMetric"] {
+        cursor: url('https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/2699.png') 32 32, pointer !important;
+    }
+
     .main { background-color: #f4f7f9; }
 
     /* 2. ENCABEZADO DINÁMICO UCV */
