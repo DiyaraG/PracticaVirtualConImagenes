@@ -183,7 +183,7 @@ with st.sidebar.expander("🌪️ Escenario de Perturbación ($Q_p$)"):
     p_magnitud = st.number_input("Magnitud Qp [m³/s]", value=0.045, format="%.4f") if p_activa else 0.0
     p_tiempo = st.slider("Inicio de perturbación [s]", 0, 500, 80) if p_activa else 0
 
-with st.sidebar.expander("🎮 Parámetros del Controlador PID"):
+with st.sidebar.expander("Parámetros del Controlador PID"):
     c1, c2, c3 = st.columns(3)
     kp_val = c1.number_input("Kp", value=2.6)
     ki_val = c2.number_input("Ki", value=0.5)
