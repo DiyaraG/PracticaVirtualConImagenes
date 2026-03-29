@@ -278,7 +278,7 @@ else:
     err_int, err_pasado = 0, 0
     barra_p = st.progress(0)
 
-    # 3. BUCLE PRINCIPAL (Cálculo y Renderizado)
+  # 3. BUCLE PRINCIPAL (Cálculo y Renderizado)
     for i, t_act in enumerate(vector_t):
         status_placeholder.markdown("<div class='flow-indicator'>💧 PROCESANDO...</div>", unsafe_allow_html=True)
         
@@ -292,37 +292,71 @@ else:
         u_log.append(u_inst)
         
         # --- RENDERIZADO DE GRÁFICOS (Matplotlib) ---
-        # A. Tanque
+        
+        # A. DIBUJO DEL TANQUE ANIMADO
         fig_t, ax_t = plt.subplots(figsize=(5, 4))
-        # ... (Tu código de dibujo del tanque aquí) ...
-        # [Se omite por brevedad, pero mantén tu lógica de ax_t.add_patch]
+        ax_t.set_xlim(-r_max*1.2, r_max*1.2)
+        ax_t.set_ylim(-0.1, h_total*1.1)
+        ax_t.set_xticks([]); ax_t.set_ylabel("Nivel [m]")
+        
+        # Simulación de oleaje visual si hay flujo de entrada
+        h_vis = h_corrida + (0.02 * np.sin(t_act * 4) if u_inst > 0.05 else 0)
+        
+        if geom_tanque == "Cilíndrico":
+            # Dibujamos el agua (rectángulo azul)
+            ax_t.add_patch(plt.Rectangle((-r_max, 0), 2*r_max, h_vis, color='#3498db', alpha=0.6))
+            # Dibujamos las paredes del tanque
+            ax_t.plot([-r_max, -r_max, r_max, r_max], [h_total, 0, 0, h_total], color='#2c3e50', lw=3)
+            
+        elif geom_tanque == "Cónico":
+            # Calculamos el radio en la superficie actual
+            r_h = (r_max / h_total) * h_vis
+            # Dibujamos el agua (triángulo/trapecio azul)
+            ax_t.add_patch(plt.Polygon([[-r_h, h_vis], [r_h, h_vis], [0, 0]], color='#3498db', alpha=0.6))
+            # Dibujamos las paredes
+            ax_t.plot([-r_max, 0, r_max], [h_total, 0, h_total], color='#2c3e50', lw=3)
+            
+        elif geom_tanque == "Esférico":
+            # Dibujamos el contorno de la esfera
+            ax_t.add_patch(plt.Circle((0, r_max), r_max, color='#2c3e50', fill=False, lw=3))
+            if h_vis > 0:
+                # Calculamos el ángulo para rellenar según el nivel (Wedge)
+                ang_w = np.degrees(np.arccos(np.clip(1 - (h_vis/r_max), -1, 1)))
+                ax_t.add_patch(plt.matplotlib.patches.Wedge((0, r_max), r_max, 270-ang_w, 270+ang_w, color='#3498db', alpha=0.6))
+
+        # Línea de referencia del Setpoint
+        ax_t.axhline(y=sp_nivel, color='red', ls='--', label=f"SP: {sp_nivel}m")
+        
+        # Mostramos en el placeholder y cerramos para liberar memoria
         placeholder_tanque.pyplot(fig_t)
         plt.close(fig_t)
 
-        # B. Tendencia
+        # B. TENDENCIA DE NIVEL
         fig_tr, ax_tr = plt.subplots(figsize=(8, 3.5))
         ax_tr.plot(vector_t[:i+1], h_log, color='#2980b9', lw=2)
-        ax_tr.axhline(y=sp_nivel, color='red', ls='--')
+        ax_tr.axhline(y=sp_nivel, color='red', ls='--', alpha=0.5)
         ax_tr.set_xlim(0, tiempo_ensayo)
         ax_tr.set_ylim(0, h_total*1.1)
+        ax_tr.set_xlabel("Tiempo [s]"); ax_tr.set_ylabel("Altura [m]")
+        ax_tr.grid(True, alpha=0.2)
         placeholder_grafico.pyplot(fig_tr)
         plt.close(fig_tr)
 
-        # C. Acción u
+        # C. ACCIÓN DEL CONTROLADOR (u)
         fig_u, ax_u = plt.subplots(figsize=(8, 2.5))
-        ax_u.step(vector_t[:i+1], u_log, color='#e67e22')
+        ax_u.step(vector_t[:i+1], u_log, color='#e67e22', where='post')
         ax_u.set_xlim(0, tiempo_ensayo)
+        ax_u.set_ylim(0, 0.7)
+        ax_u.set_ylabel("u [m³/s]")
         placeholder_u.pyplot(fig_u)
         plt.close(fig_u)
 
-        # Métricas
+        # ACTUALIZACIÓN DE MÉTRICAS
         m_h.metric("Nivel PV [m]", f"{h_corrida:.3f}")
         m_e.metric("Error [m]", f"{e_inst:.4f}")
         
         time.sleep(0.01) 
         barra_p.progress((i+1)/len(vector_t))
-
-    status_placeholder.empty()
 
     # 4. FINALIZACIÓN Y RESULTADOS
     st.success(f" Simulación del Tanque {geom_tanque} completada.")
