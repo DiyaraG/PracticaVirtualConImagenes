@@ -82,9 +82,9 @@ with col_tit:
     st.markdown("<p style='text-align: center; color: #5d6d7e;'>Escuela de Ingeniería Química | Facultad de Ingeniería - UCV</p>", unsafe_allow_html=True)
 
 with col_l2: 
-    # Aquí llamamos directamente a st.image para darle un tamaño mayor (ejemplo: 180)
+    
     if os.path.exists("Logo_ingenieriaquimica.png"):
-        st.image("Logo_ingenieriaquimica.png", width=180) 
+        st.image("Logo_ingenieriaquimica.png", width=120) 
     else:
         st.markdown("<div style='border:1px solid #ccc; padding:10px;'>EIQ</div>", unsafe_allow_html=True)
 
