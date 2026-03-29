@@ -25,12 +25,12 @@ st.markdown("""
     /* 1. CONFIGURACIÓN GLOBAL Y CURSOR DE INGENIERÍA */
     html, body, [data-testid="stAppViewContainer"] {
         /* Usamos el engranaje (2699) con un tamaño optimizado para precisión */
-        cursor: url('https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/2699.png') 10 10, auto;
+        cursor: url('https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/2699.png') 2 2, auto;
     }
     
     /* Cambiamos el cursor también para los elementos interactivos */
     button, a, input, select, [data-testid="stMetric"] {
-        cursor: url('https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/2699.png') 10 10, pointer !important;
+        cursor: url('https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/2699.png') 2 2, pointer !important;
     }
 
     .main { background-color: #f4f7f9; }
