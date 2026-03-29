@@ -15,28 +15,23 @@ st.set_page_config(
     layout="wide"
 )
 
-# Inicialización del estado de simulación para el Reset
+# Inicialización del estado
 if 'ejecutando' not in st.session_state:
     st.session_state.ejecutando = False
 
-# Estilos CSS Unificados: Profesionalismo + Animación de Flujo
+# Estilos CSS Unificados: Todo en un solo bloque para evitar errores
 st.markdown("""
     <style>
     /* 1. CONFIGURACIÓN GLOBAL Y CURSOR OPTIMIZADO */
     html, body, [data-testid="stAppViewContainer"] {
-        /* Cambiamos el tamaño de la imagen en la URL de 72x72 a 32x32 */
         cursor: url('https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/32x32/2699.png') 16 16, auto;
     }
 
-    /* Opcional: Cambiar a puntero al pasar sobre botones para mantener la usabilidad */
     button, [data-testid="stHeaderActionElements"] {
         cursor: pointer !important;
     }
     
     .main { background-color: #f4f7f9; }
-    /* ... resto de tu CSS ... */
-    </style>
-    """, unsafe_allow_html=True)
 
     /* 2. ENCABEZADO DINÁMICO UCV */
     .header-container {
@@ -50,13 +45,14 @@ st.markdown("""
         color: white;
         text-align: center;
     }
+
     @keyframes gradient {
         0% { background-position: 0% 50%; }
         50% { background-position: 100% 50%; }
         100% { background-position: 0% 50%; }
     }
 
-    /* 3. INDICADOR DE FLUJO ACTIVO (NUEVO) */
+    /* 3. INDICADOR DE FLUJO ACTIVO */
     .flow-indicator {
         background: #e8f4f8;
         border-left: 5px solid #3498db;
@@ -69,13 +65,14 @@ st.markdown("""
         color: #1a5276;
         animation: pulse 2s infinite;
     }
+
     @keyframes pulse {
         0% { opacity: 0.6; }
         50% { opacity: 1; }
         100% { opacity: 0.6; }
     }
 
-    /* 4. MÉTRICAS Y BOTONES (Estructura Original) */
+    /* 4. MÉTRICAS Y BOTONES */
     [data-testid="stMetricValue"] { font-size: 1.8rem; color: #1a5276; font-weight: bold; }
     div.stMetric {
         background-color: #ffffff;
@@ -93,8 +90,6 @@ st.markdown("""
     }
     </style>
     """, unsafe_allow_html=True)
-
-# ... (Configuración de página y estilos CSS arriba) ...
 
 # =============================================================================
 # ENCABEZADO INSTITUCIONAL CON FONDO (COLOCAR AQUÍ)
