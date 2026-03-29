@@ -148,7 +148,7 @@ with col_teoria1:
         """)
 
 with col_teoria2:
-    with st.expander(Teoría: Estrategia de control PID", expanded=False):
+    with st.expander("Teoría: Estrategia de control PID", expanded=False):
         st.markdown(r"""
         El "cerebro" de la simulación es un controlador **Proporcional-Integral-Derivativo (PID)**, cuya acción de control $u(t)$ busca minimizar el error ($e = SP - h$):
         
