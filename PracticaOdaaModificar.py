@@ -348,10 +348,25 @@ st.dataframe(
     use_container_width=True
 )
     
-    df_descarga = pd.DataFrame({"Tiempo [s]": vector_t, "Nivel [m]": h_log, "Caudal [m3/s]": u_log})
+df_descarga = pd.DataFrame({"Tiempo [s]": vector_t, "Nivel [m]": h_log, "Caudal [m3/s]": u_log})
     area_descarga.download_button(
         "📥 Descargar Datos del Ensayo (CSV)", 
         df_descarga.to_csv(index=False), 
         "resultados_simulacion_ucv.csv", 
         use_container_width=True)
+
+# --- ANÁLISIS AUTOMÁTICO DE RESULTADOS ---
+st.markdown("---")
+st.subheader("💡 Análisis de Estabilidad")
+
+# Cálculo de métricas básicas
+error_final = abs(sp_nivel - h_log[-1])
+mse_total = np.mean((np.array(h_log) - sp_nivel)**2)
+
+if error_final < 0.05:
+    st.success(f"✅ **Sistema Estabilizado:** El nivel final ({h_log[-1]:.3f} m) se encuentra dentro del margen de tolerancia del Setpoint.")
+else:
+    st.warning(f"⚠️ **Desviación Detectada:** El sistema terminó con un error de {error_final:.3f} m. Considere ajustar los parámetros PID (Kp, Ki, Kd).")
+
+st.info(f"**Error Cuadrático Medio (MSE):** {mse_total:.5f}")
     
