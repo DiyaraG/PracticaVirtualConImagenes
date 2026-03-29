@@ -349,7 +349,7 @@ st.dataframe(
 )
     
 df_descarga = pd.DataFrame({"Tiempo [s]": vector_t, "Nivel [m]": h_log, "Caudal [m3/s]": u_log})
-    area_descarga.download_button(
+area_descarga.download_button(
         "📥 Descargar Datos del Ensayo (CSV)", 
         df_descarga.to_csv(index=False), 
         "resultados_simulacion_ucv.csv", 
