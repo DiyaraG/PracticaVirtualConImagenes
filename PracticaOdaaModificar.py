@@ -11,7 +11,7 @@ from sklearn.metrics import mean_squared_error
 # =============================================================================
 st.set_page_config(
     page_title="Tesis UCV - Simulación Dinámica",
-    page_icon="🧪",
+    page_icon="🛠️",
     layout="wide"
 )
 
