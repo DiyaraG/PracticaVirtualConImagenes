@@ -5,7 +5,6 @@ import matplotlib.pyplot as plt
 import os
 import time
 from sklearn.metrics import mean_squared_error
-
 # =============================================================================
 # 1. CONFIGURACIÓN E IDENTIDAD INSTITUCIONAL UCV
 # =============================================================================
@@ -19,18 +18,14 @@ st.set_page_config(
 if 'ejecutando' not in st.session_state:
     st.session_state.ejecutando = False
 
-# Estilos CSS Unificados: Todo en un solo bloque para evitar errores
+# Estilos CSS Unificados: Todo en un solo bloque corregido
 st.markdown("""
     <style>
-    /* 1. CONFIGURACIÓN GLOBAL Y CURSOR OPTIMIZADO */
+    /* 1. CONFIGURACIÓN GLOBAL Y CURSOR */
     html, body, [data-testid="stAppViewContainer"] {
-        cursor: url('https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/32x32/2699.png') 16 16, auto;
+        cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' style='font-size: 24px;'><text y='20'>⚙️</text></svg>") 16 16, auto;
     }
-
-    button, [data-testid="stHeaderActionElements"] {
-        cursor: pointer !important;
-    }
-    
+    button, [data-testid="stHeaderActionElements"] { cursor: pointer !important; }
     .main { background-color: #f4f7f9; }
 
     /* 2. ENCABEZADO DINÁMICO UCV */
@@ -38,14 +33,9 @@ st.markdown("""
         background: linear-gradient(-45deg, #1a5276, #21618c, #154360, #1a5276);
         background-size: 400% 400%;
         animation: gradient 15s ease infinite;
-        padding: 25px;
-        border-radius: 15px;
-        margin-bottom: 25px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        color: white;
-        text-align: center;
+        padding: 25px; border-radius: 15px; margin-bottom: 25px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1); color: white; text-align: center;
     }
-
     @keyframes gradient {
         0% { background-position: 0% 50%; }
         50% { background-position: 100% 50%; }
@@ -54,32 +44,20 @@ st.markdown("""
 
     /* 3. INDICADOR DE FLUJO ACTIVO */
     .flow-indicator {
-        background: #e8f4f8;
-        border-left: 5px solid #3498db;
-        padding: 10px;
-        border-radius: 5px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        font-weight: bold;
-        color: #1a5276;
-        animation: pulse 2s infinite;
+        background: #e8f4f8; border-left: 5px solid #3498db;
+        padding: 10px; border-radius: 5px; display: flex;
+        align-items: center; gap: 10px; font-weight: bold;
+        color: #1a5276; animation: pulse 2s infinite;
     }
-
     @keyframes pulse {
-        0% { opacity: 0.6; }
-        50% { opacity: 1; }
-        100% { opacity: 0.6; }
+        0% { opacity: 0.6; } 50% { opacity: 1; } 100% { opacity: 0.6; }
     }
 
     /* 4. MÉTRICAS Y BOTONES */
     [data-testid="stMetricValue"] { font-size: 1.8rem; color: #1a5276; font-weight: bold; }
     div.stMetric {
-        background-color: #ffffff;
-        padding: 20px;
-        border-radius: 12px;
-        border-left: 8px solid #1a5276;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        background-color: #ffffff; padding: 20px; border-radius: 12px;
+        border-left: 8px solid #1a5276; box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     }
     .stButton>button {
         background-color: #1a5276; color: white; border-radius: 10px;
@@ -90,6 +68,7 @@ st.markdown("""
     }
     </style>
     """, unsafe_allow_html=True)
+
 
 # =============================================================================
 # ENCABEZADO INSTITUCIONAL CON FONDO (COLOCAR AQUÍ)
