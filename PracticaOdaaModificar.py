@@ -237,7 +237,7 @@ if iniciar_sim:
 estado_expander = not st.session_state.ejecutando
 
 # --- PESTAÑA DEL DIAGRAMA (Se cierra sola al iniciar) ---
-with st.expander("📸 Diagrama del Proceso: Planta Piloto EIQ-UCV", expanded=estado_expander):
+with st.expander("Diagrama del Proceso", expanded=estado_expander):
     col_img = st.columns([1, 5, 1])[1]
     with col_img:
         if os.path.exists("Captura de pantalla 2026-03-29 163125.png"):
@@ -325,7 +325,7 @@ else:
     status_placeholder.empty()
 
     # 4. FINALIZACIÓN Y RESULTADOS
-    st.success(f"✨ Simulación de {geom_tanque} completada.")
+    st.success(f" Simulación del Tanque {geom_tanque} completada.")
     st.balloons()
     
     # Tabla resumen y descarga
@@ -336,7 +336,7 @@ else:
 
     # Análisis de Estabilidad
     st.markdown("---")
-    st.subheader("💡 Análisis de Estabilidad")
+    st.subheader("Análisis de Estabilidad")
     error_final = abs(sp_nivel - h_log[-1])
     if error_final < 0.05:
         st.success(f"✅ Sistema Estabilizado en {h_log[-1]:.3f} m.")
