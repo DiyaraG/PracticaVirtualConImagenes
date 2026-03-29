@@ -100,7 +100,7 @@ def get_base64(path):
     return None
 
 logo_ucv_64 = get_base64("logo_ucv.png")
-logo_eiq_64 = get_base64("Logo_ingenieriaquimica.png")
+logo_eiq_64 = get_base64("logoquimicaborde.png")
 
 st.markdown(f"""
 <div class="header-container">
