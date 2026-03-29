@@ -112,15 +112,12 @@ st.markdown(f"""
             <h1 style="color: white !important; font-size: 2.2rem;">Práctica Virtual: Balance en estado no estacionario</h1>
             <p style="color: #d4e6f1 !important; margin: 0;">Escuela de Ingeniería Química | Facultad de Ingeniería - UCV</p>
         </div>
-        <div class="img-fluid" style="width: 120px;">
-            {f'<img src="data:image/png;base64,{logo_eiq_64}" width="150">' if logo_eiq_64 else "EIQ"}
+        <div class="img-fluid" style="width: 140px;">
+            {f'<img src="data:image/png;base64,{logo_eiq_64}" width="130">' if logo_eiq_64 else "EIQ"}
         </div>
     </div>
 </div>
 """, unsafe_allow_html=True)
-
-# Opcional: Una línea divisoria elegante si sientes que hace falta
-# st.markdown("---") 
 
 # =============================================================================
 # 2. MARCO TEÓRICO: BALANCE DE MASA Y TORRICELLI
