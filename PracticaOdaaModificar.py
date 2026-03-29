@@ -112,7 +112,7 @@ st.markdown(f"""
             <h1 style="color: white !important; font-size: 2.2rem;">Práctica Virtual: Balance en estado no estacionario</h1>
             <p style="color: #d4e6f1 !important; margin: 0;">Escuela de Ingeniería Química | Facultad de Ingeniería - UCV</p>
         </div>
-        <div class="img-fluid" style="width: 140px;">
+        <div class="img-fluid" style="width: 160px;">
             {f'<img src="data:image/png;base64,{logo_eiq_64}" width="130">' if logo_eiq_64 else "EIQ"}
         </div>
     </div>
