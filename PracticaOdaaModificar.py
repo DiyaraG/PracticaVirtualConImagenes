@@ -123,24 +123,45 @@ st.markdown(f"""
 # =============================================================================
 # 2. MARCO TEÓRICO: BALANCE DE MASA Y TORRICELLI
 # =============================================================================
-with st.expander("📖 Marco Teórico: Ecuaciones de Conservación y Descarga", expanded=False):
-    st.markdown(r"""
-    La dinámica del sistema se describe mediante el **Balance Global de Masa** para un volumen de control con densidad constante ($\rho$):
-    
-    $$ \frac{dV}{dt} = Q_{in} - Q_{out} \pm Q_{p} $$
-    
-    Considerando que el volumen es función del nivel ($V = \int A(h)dh$), aplicamos la regla de la cadena para obtener la ecuación general de vaciado/llenado válida para **cualquier área transversal $A(h)$**:
-    
-    $$ A(h) \frac{dh}{dt} = Q_{in} - (C_d \cdot a \cdot \sqrt{2gh}) \pm Q_{p} $$
-    
-    Donde:
-    * **$A(h)$**: Área de la sección transversal en función de la altura (m²).
-    * **$Q_{in}$**: Flujo de entrada controlado (m³/s).
-    * **$Q_{out}$**: Flujo de salida basado en la **Ley de Torricelli** (m³/s).
-    * **$C_d$**: Coeficiente de descarga (adimensional).
-    * **$a$**: Área del orificio de salida (m²).
-    * **$Q_{p}$**: Flujo de perturbación o falla (m³/s).
-    """)
+# =============================================================================
+# 2. MARCO TEÓRICO INTEGRADO: FÍSICA Y CONTROL
+# =============================================================================
+col_teoria1, col_teoria2 = st.columns(2)
+
+with col_teoria1:
+    with st.expander("📖 Física: Ecuaciones de Conservación y Descarga", expanded=False):
+        st.markdown(r"""
+        La dinámica del sistema se describe mediante el **Balance Global de Masa** para un volumen de control con densidad constante ($\rho$):
+        
+        $$ \frac{dV}{dt} = Q_{in} - Q_{out} \pm Q_{p} $$
+        
+        Considerando que el volumen es función del nivel ($V = \int A(h)dh$), aplicamos la regla de la cadena para obtener la ecuación general de vaciado/llenado válida para **cualquier área transversal $A(h)$**:
+        
+        $$ A(h) \frac{dh}{dt} = Q_{in} - (C_d \cdot a \cdot \sqrt{2gh}) \pm Q_{p} $$
+        
+        Donde:
+        * **$A(h)$**: Área de la sección transversal en función de la altura (m²).
+        * **$Q_{in}$**: Flujo de entrada controlado (m³/s).
+        * **$Q_{out}$**: Flujo de salida basado en la **Ley de Torricelli** (m³/s).
+        * **$C_d$**: Coeficiente de descarga (adimensional).
+        * **$a$**: Área del orificio de salida (m²).
+        * **$Q_{p}$**: Flujo de perturbación o falla (m³/s).
+        """)
+
+with col_teoria2:
+    with st.expander("🕹️ Control: Estrategia PID Discreta", expanded=False):
+        st.markdown(r"""
+        El "cerebro" de la simulación es un controlador **Proporcional-Integral-Derivativo (PID)**, cuya acción de control $u(t)$ busca minimizar el error ($e = SP - h$):
+        
+        $$ u(t) = K_p e(t) + K_i \int_{0}^{t} e(\tau) d\tau + K_d \frac{de(t)}{dt} $$
+        
+        **Funciones de los parámetros sintonizables:**
+        * **$K_p$ (Proporcional):** Proporciona una respuesta inmediata al error actual.
+        * **$K_i$ (Integral):** Elimina el error residual (offset) acumulando desviaciones pasadas; es vital para el rechazo de perturbaciones ($Q_p$).
+        * **$K_d$ (Derivativo):** Anticipa el comportamiento futuro del error para evitar sobrepicos y estabilizar la respuesta.
+        
+        En este simulador, las ecuaciones se resuelven numéricamente mediante el **Método de Euler** con un paso de tiempo $\Delta t = 1.0$ s.
+        """)
 
 # =============================================================================
 # 3. BARRA LATERAL: PARÁMETROS TÉCNICOS
