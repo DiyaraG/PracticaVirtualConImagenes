@@ -19,10 +19,53 @@ st.set_page_config(
 if 'ejecutando' not in st.session_state:
     st.session_state.ejecutando = False
 
-# Estilos CSS Avanzados para una interfaz profesional y académica
+# Estilos CSS Unificados: Profesionalismo + Animación de Flujo
 st.markdown("""
     <style>
+    /* 1. CONFIGURACIÓN GLOBAL Y CURSOR */
+    html, body, [data-testid="stAppViewContainer"] {
+        cursor: url('https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/1f9ea.png'), auto;
+    }
     .main { background-color: #f4f7f9; }
+
+    /* 2. ENCABEZADO DINÁMICO UCV */
+    .header-container {
+        background: linear-gradient(-45deg, #1a5276, #21618c, #154360, #1a5276);
+        background-size: 400% 400%;
+        animation: gradient 15s ease infinite;
+        padding: 25px;
+        border-radius: 15px;
+        margin-bottom: 25px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        color: white;
+        text-align: center;
+    }
+    @keyframes gradient {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    /* 3. INDICADOR DE FLUJO ACTIVO (NUEVO) */
+    .flow-indicator {
+        background: #e8f4f8;
+        border-left: 5px solid #3498db;
+        padding: 10px;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: bold;
+        color: #1a5276;
+        animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+        0% { opacity: 0.6; }
+        50% { opacity: 1; }
+        100% { opacity: 0.6; }
+    }
+
+    /* 4. MÉTRICAS Y BOTONES (Estructura Original) */
     [data-testid="stMetricValue"] { font-size: 1.8rem; color: #1a5276; font-weight: bold; }
     div.stMetric {
         background-color: #ffffff;
@@ -32,63 +75,56 @@ st.markdown("""
         box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     }
     .stButton>button {
-        background-color: #1a5276;
-        color: white;
-        border-radius: 10px;
-        font-weight: bold;
-        height: 3.5em;
-        width: 100%;
-        transition: 0.3s;
+        background-color: #1a5276; color: white; border-radius: 10px;
+        font-weight: bold; height: 3.5em; width: 100%; transition: 0.3s;
     }
-    .stButton>button:hover {
-        background-color: #154360;
-        box-shadow: 0 4px 15px rgba(26,82,118,0.3);
-    }
-    /* Estilo para el botón de Reset (color rojo UCV) */
     div.stButton > button:first-child[kind="secondary"] {
-        background-color: #943126;
-        color: white;
-        border: none;
-    }
-    h1 { color: #1a5276; text-align: center; }
-    h3 { color: #21618c; border-bottom: 2px solid #d4e6f1; padding-bottom: 8px; }
-    .instruccion-box {
-        background-color: #e8f4f8;
-        padding: 30px;
-        border-radius: 15px;
-        border: 1px dashed #1a5276;
-        text-align: center;
-        color: #1a5276;
-        font-size: 1.2em;
+        background-color: #943126; color: white; border: none;
     }
     </style>
     """, unsafe_allow_html=True)
 
-# Encabezado Institucional: Escuela de Ingeniería Química
-col_l1, col_tit, col_l2 = st.columns([1, 4.5, 1.5])
+# ... (Configuración de página y estilos CSS arriba) ...
 
-def render_logo_institucional(ruta, nombre):
-    if os.path.exists(ruta):
-        st.image(ruta, width=110)
-    else:
-        st.markdown(f"<div style='border:1px solid #ccc; padding:10px;'>{nombre}</div>", unsafe_allow_html=True)
+# =============================================================================
+# ENCABEZADO INSTITUCIONAL CON FONDO (COLOCAR AQUÍ)
+# =============================================================================
+import base64
 
-with col_l1: 
-    #izquierda
-    render_logo_institucional("logo_ucv.png", "UCV")
+def get_base64(path):
+    if os.path.exists(path):
+        with open(path, "rb") as f:
+            return base64.b64encode(f.read()).decode()
+    return None
 
-with col_tit:
-    st.markdown("<h1>Práctica Virtual: Balance en estado no estacionario</h1>", unsafe_allow_html=True)
-    st.markdown("<p style='text-align: center; color: #5d6d7e;'>Escuela de Ingeniería Química | Facultad de Ingeniería - UCV</p>", unsafe_allow_html=True)
+logo_ucv_64 = get_base64("logo_ucv.png")
+logo_eiq_64 = get_base64("Logo_ingenieriaquimica.png")
 
-with col_l2: 
-    
-    if os.path.exists("Logo_ingenieriaquimica.png"):
-        st.image("Logo_ingenieriaquimica.png", width=150) 
-    else:
-        st.markdown("<div style='border:1px solid #ccc; padding:10px;'>EIQ</div>", unsafe_allow_html=True)
+st.markdown(f"""
+<div class="header-container">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <div class="img-fluid" style="width: 120px;">
+            {f'<img src="data:image/png;base64,{logo_ucv_64}" width="100">' if logo_ucv_64 else "UCV"}
+        </div>
+        <div>
+            <h1 style="color: white !important; font-size: 2.2rem;">Práctica Virtual: Balance en estado no estacionario</h1>
+            <p style="color: #d4e6f1 !important; margin: 0;">Escuela de Ingeniería Química | Facultad de Ingeniería - UCV</p>
+        </div>
+        <div class="img-fluid" style="width: 120px;">
+            {f'<img src="data:image/png;base64,{logo_eiq_64}" width="130">' if logo_eiq_64 else "EIQ"}
+        </div>
+    </div>
+</div>
+""", unsafe_allow_html=True)
 
-st.markdown("---")
+# Opcional: Una línea divisoria elegante si sientes que hace falta
+# st.markdown("---") 
+
+# =============================================================================
+# 2. MARCO TEÓRICO (Continúa tu código original...)
+# =============================================================================
+with st.expander("📖 Marco Teórico...", expanded=False):
+    # ... resto del código
 
 # =============================================================================
 # 2. MARCO TEÓRICO: BALANCE DE MASA Y TORRICELLI
@@ -213,6 +249,7 @@ if not st.session_state.ejecutando:
         </div>
     """, unsafe_allow_html=True)
 else:
+    status_placeholder = st.empty()
     # 1. Preparación de variables de estado
     dt = 1.0 
     vector_t = np.arange(0, tiempo_ensayo, dt)
@@ -224,6 +261,12 @@ else:
 
     # 2. Bucle principal de cálculo y renderizado
     for i, t_act in enumerate(vector_t):
+        status_placeholder.markdown("""
+            <div class="flow-indicator">
+                <span style="font-size: 20px;">💧</span> 
+                PROCESANDO FLUJO DINÁMICO...
+            </div>
+        """, unsafe_allow_html=True)
         # Lógica de perturbación
         q_p_inst = p_magnitud if (p_activa and t_act >= p_tiempo) else 0.0
         
@@ -292,10 +335,24 @@ else:
         # Pausa breve para permitir que Streamlit renderice
         time.sleep(0.01) 
         barra_p.progress((i+1)/len(vector_t))
+    status_placeholder.empty()
 
     # --- FINALIZACIÓN ---
     st.success(f"✨ Simulación de {geom_tanque} completada.")
     st.balloons()
+    # --- TABLA DE RESULTADOS ESTILIZADA ---
+st.subheader("📋 Resumen del Ensayo")
+df_final = pd.DataFrame({
+    "Tiempo [s]": vector_t,
+    "Nivel [m]": h_log,
+    "Caudal Entrada [m³/s]": u_log
+})
+
+# Mostramos solo las últimas filas para no saturar, pero con estilo
+st.dataframe(
+    df_final.tail(10).style.format("{:.4f}"), 
+    use_container_width=True
+)
     
     df_descarga = pd.DataFrame({"Tiempo [s]": vector_t, "Nivel [m]": h_log, "Caudal [m3/s]": u_log})
     area_descarga.download_button(
