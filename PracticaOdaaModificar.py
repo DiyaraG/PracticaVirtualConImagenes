@@ -84,7 +84,7 @@ with col_tit:
 with col_l2: 
     # Aquí llamamos directamente a st.image para darle un tamaño mayor (ejemplo: 180)
     if os.path.exists("logo ingenieria quimica.jpeg"):
-        st.image("logo_quimica.png", width=180) 
+        st.image("logo ingenieria quimica.jpeg", width=180) 
     else:
         st.markdown("<div style='border:1px solid #ccc; padding:10px;'>EIQ</div>", unsafe_allow_html=True)
 
