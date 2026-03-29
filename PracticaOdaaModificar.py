@@ -121,12 +121,6 @@ st.markdown(f"""
 # st.markdown("---") 
 
 # =============================================================================
-# 2. MARCO TEÓRICO (Continúa tu código original...)
-# =============================================================================
-with st.expander("📖 Marco Teórico...", expanded=False):
-    # ... resto del código
-
-# =============================================================================
 # 2. MARCO TEÓRICO: BALANCE DE MASA Y TORRICELLI
 # =============================================================================
 with st.expander("📖 Marco Teórico: Ecuaciones de Conservación y Descarga", expanded=False):
