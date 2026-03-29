@@ -84,7 +84,7 @@ with col_tit:
 with col_l2: 
     
     if os.path.exists("Logo_ingenieriaquimica.png"):
-        st.image("Logo_ingenieriaquimica.png", width=120) 
+        st.image("Logo_ingenieriaquimica.png", width=150) 
     else:
         st.markdown("<div style='border:1px solid #ccc; padding:10px;'>EIQ</div>", unsafe_allow_html=True)
 
